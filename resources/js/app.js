@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return new coreui.Popover(popoverTriggerEl);
     });
 
-    // FIX: Ajustar wrapper dinámicamente cuando el sidebar se colapsa
+    // FIX DEFINITIVO: Ajustar wrapper dinámicamente cuando el sidebar se colapsa
     const sidebar = document.querySelector('.sidebar');
     const wrapper = document.querySelector('.wrapper');
     
@@ -42,18 +42,27 @@ document.addEventListener('DOMContentLoaded', function () {
         function adjustWrapper() {
             const isNarrow = sidebar.classList.contains('sidebar-narrow');
             
+            console.log('Sidebar narrow:', isNarrow); // Debug
+            
             if (isNarrow) {
                 // Sidebar colapsado - wrapper pegado a la izquierda
                 wrapper.style.paddingLeft = '56px';
+                console.log('Aplicando padding: 56px');
             } else {
                 // Sidebar abierto - wrapper con espacio completo
                 wrapper.style.paddingLeft = '256px';
+                console.log('Aplicando padding: 256px');
             }
         }
         
         // Observar cambios en las clases del sidebar
-        const observer = new MutationObserver(function() {
-            adjustWrapper();
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.attributeName === 'class') {
+                    console.log('Clase cambiada, ajustando wrapper');
+                    adjustWrapper();
+                }
+            });
         });
         
         observer.observe(sidebar, {
@@ -63,6 +72,14 @@ document.addEventListener('DOMContentLoaded', function () {
         
         // Ajustar al cargar la página
         adjustWrapper();
+        
+        // También escuchar el evento de CoreUI
+        document.addEventListener('sidebar-toggle', function() {
+            console.log('Evento sidebar-toggle detectado');
+            setTimeout(adjustWrapper, 50);
+        });
+    } else {
+        console.error('Sidebar o wrapper no encontrados');
     }
 });
 

@@ -22,21 +22,14 @@
     --cui-sidebar-active-bg: #28a745;
 }
 
-/* FIX PRINCIPAL: Wrapper con padding-left dinámico controlado por JS */
+/* FIX PRINCIPAL: Wrapper dinámico - JavaScript controla el padding */
 .wrapper {
-    padding-left: 0;
+    padding-left: 256px;
     background-color: #f0f2f5;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    transition: padding-left 0.3s ease, margin-left 0.3s ease;
-}
-
-/* Estado por defecto en desktop */
-@media (min-width: 768px) {
-    .wrapper {
-        padding-left: 256px;
-    }
+    transition: padding-left 0.3s ease;
 }
 
 /* Sidebar personalizado */
@@ -150,14 +143,14 @@
     background-color: #fff;
 }
 
-/* FIX: Body principal con flex-grow */
+/* Body principal con flex-grow */
 .body {
     padding: 1.5rem;
     background-color: #f0f2f5;
     flex: 1;
 }
 
-/* FIX: Footer sin espacio superior */
+/* Footer */
 .footer {
     background: #fff;
     border-top: 1px solid #dee2e6;
@@ -241,7 +234,7 @@
     color: #6c757d !important;
 }
 
-/* Responsive adjustments */
+/* Responsive adjustments - SOLO MOVIL */
 @media (max-width: 767px) {
     .sidebar {
         margin-left: -256px;
