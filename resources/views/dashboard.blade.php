@@ -23,75 +23,64 @@
 <div class="row">
     <div class="col-sm-6 col-lg-3">
         <div class="card mb-4 text-white bg-success">
-            <div class="card-body pb-0 d-flex justify-content-between align-items-start">
+            <div class="card-body d-flex justify-content-between align-items-center">
                 <div>
-                    <div class="fs-4 fw-semibold">
-                        0
-                        <span class="fs-6 ms-2 fw-normal">
-                            Empleados
-                        </span>
-                    </div>
-                    <div>Activos</div>
+                    <div class="fs-4 fw-semibold">0</div>
+                    <div>Empleados Activos</div>
                 </div>
-                <svg class="icon icon-xl">
-                    <use xlink:href="#cil-people"></use>
-                </svg>
+                <div class="stats-icon">
+                    <svg class="icon icon-xl">
+                        <use xlink:href="#cil-people"></use>
+                    </svg>
+                </div>
             </div>
         </div>
     </div>
     
     <div class="col-sm-6 col-lg-3">
         <div class="card mb-4 text-white bg-info">
-            <div class="card-body pb-0 d-flex justify-content-between align-items-start">
+            <div class="card-body d-flex justify-content-between align-items-center">
                 <div>
-                    <div class="fs-4 fw-semibold">
-                        0
-                        <span class="fs-6 ms-2 fw-normal">
-                            Parcelas
-                        </span>
-                    </div>
-                    <div>Registradas</div>
+                    <div class="fs-4 fw-semibold">0</div>
+                    <div>Parcelas Registradas</div>
                 </div>
-                <svg class="icon icon-xl">
-                    <use xlink:href="#cil-location-pin"></use>
-                </svg>
+                <div class="stats-icon">
+                    <svg class="icon icon-xl">
+                        <use xlink:href="#cil-location-pin"></use>
+                    </svg>
+                </div>
             </div>
         </div>
     </div>
     
     <div class="col-sm-6 col-lg-3">
         <div class="card mb-4 text-white bg-warning">
-            <div class="card-body pb-0 d-flex justify-content-between align-items-start">
+            <div class="card-body d-flex justify-content-between align-items-center">
                 <div>
-                    <div class="fs-4 fw-semibold">
-                        0
-                        <span class="fs-6 ms-2 fw-normal">
-                            Trabajos
-                        </span>
-                    </div>
-                    <div>Este mes</div>
+                    <div class="fs-4 fw-semibold">0</div>
+                    <div>Trabajos Este mes</div>
                 </div>
-                <svg class="icon icon-xl">
-                    <use xlink:href="#cil-task"></use>
-                </svg>
+                <div class="stats-icon">
+                    <svg class="icon icon-xl">
+                        <use xlink:href="#cil-task"></use>
+                    </svg>
+                </div>
             </div>
         </div>
     </div>
     
     <div class="col-sm-6 col-lg-3">
         <div class="card mb-4 text-white bg-danger">
-            <div class="card-body pb-0 d-flex justify-content-between align-items-start">
+            <div class="card-body d-flex justify-content-between align-items-center">
                 <div>
-                    <div class="fs-4 fw-semibold">
-                        Bs. 0
-                        <span class="fs-6 ms-2 fw-normal">
-                        </span>
-                    </div>
+                    <div class="fs-4 fw-semibold">Bs. 0</div>
                     <div>Anticipos Pendientes</div>
                 </div>
-                <svg class="icon icon-xl">
-                    <use xlink:href="#cil-dollar"></use>
-                </svg>
+                <div class="stats-icon">
+                    <svg class="icon icon-xl">
+                        <use xlink:href="#cil-dollar"></use>
+                    </svg>
+                </div>
             </div>
         </div>
     </div>
@@ -106,7 +95,9 @@
             </div>
             <div class="card-body">
                 <div class="alert alert-info mb-0" role="alert">
-                    <i class="cil-info me-2"></i>
+                    <svg class="icon me-2">
+                        <use xlink:href="#cil-info"></use>
+                    </svg>
                     No hay trabajos registrados aún. Comienza registrando empleados y parcelas.
                 </div>
             </div>
@@ -124,35 +115,35 @@
             <div class="card-body">
                 <div class="row g-3">
                     <div class="col-md-3">
-                        <a href="{{ route('empleados.create') }}" class="btn btn-success w-100 py-3">
-                            <svg class="icon icon-xl">
+                        <a href="{{ route('empleados.create') }}" class="btn btn-success w-100 py-3 d-flex flex-column align-items-center">
+                            <svg class="icon icon-xl mb-2">
                                 <use xlink:href="#cil-user-follow"></use>
                             </svg>
-                            <div class="mt-2">Nuevo Empleado</div>
+                            <span>Nuevo Empleado</span>
                         </a>
                     </div>
                     <div class="col-md-3">
-                        <a href="{{ route('parcelas.create') }}" class="btn btn-info w-100 py-3">
-                            <svg class="icon icon-xl">
+                        <a href="{{ route('parcelas.create') }}" class="btn btn-info w-100 py-3 d-flex flex-column align-items-center">
+                            <svg class="icon icon-xl mb-2">
                                 <use xlink:href="#cil-location-pin"></use>
                             </svg>
-                            <div class="mt-2">Nueva Parcela</div>
+                            <span>Nueva Parcela</span>
                         </a>
                     </div>
                     <div class="col-md-3">
-                        <a href="{{ route('trabajos.create') }}" class="btn btn-warning w-100 py-3">
-                            <svg class="icon icon-xl">
+                        <a href="{{ route('trabajos.create') }}" class="btn btn-warning w-100 py-3 d-flex flex-column align-items-center">
+                            <svg class="icon icon-xl mb-2">
                                 <use xlink:href="#cil-task"></use>
                             </svg>
-                            <div class="mt-2">Registrar Trabajo</div>
+                            <span>Registrar Trabajo</span>
                         </a>
                     </div>
                     <div class="col-md-3">
-                        <a href="{{ route('anticipos.create') }}" class="btn btn-danger w-100 py-3">
-                            <svg class="icon icon-xl">
+                        <a href="{{ route('anticipos.create') }}" class="btn btn-danger w-100 py-3 d-flex flex-column align-items-center">
+                            <svg class="icon icon-xl mb-2">
                                 <use xlink:href="#cil-dollar"></use>
                             </svg>
-                            <div class="mt-2">Nuevo Anticipo</div>
+                            <span>Nuevo Anticipo</span>
                         </a>
                     </div>
                 </div>
