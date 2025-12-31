@@ -78,6 +78,34 @@
     font-weight: 600;
 }
 
+/* Stats cards en dashboard */
+.card.text-white {
+    border: none;
+    border-radius: 0.75rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    min-height: 120px;
+}
+
+.card.text-white .card-body {
+    padding: 1.5rem;
+}
+
+.card.text-white .fs-4 {
+    font-size: 1.75rem !important;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.stats-icon {
+    opacity: 0.5;
+    flex-shrink: 0;
+}
+
+.stats-icon .icon {
+    width: 3rem;
+    height: 3rem;
+}
+
 /* Botones personalizados */
 .btn-primary {
     background-color: var(--cui-primary);
@@ -154,22 +182,6 @@
     color: #495057;
 }
 
-/* Stats cards en dashboard */
-.card.text-white {
-    border: none;
-    border-radius: 0.75rem;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-}
-
-.card.text-white .card-body {
-    padding: 1.5rem;
-}
-
-.card.text-white .fs-4 {
-    font-size: 2rem !important;
-    font-weight: 700;
-}
-
 /* Icons */
 .icon {
     display: inline-block;
@@ -207,6 +219,15 @@
     
     .sidebar.show {
         margin-left: 0;
+    }
+    
+    .card.text-white .fs-4 {
+        font-size: 1.5rem !important;
+    }
+    
+    .stats-icon .icon {
+        width: 2rem;
+        height: 2rem;
     }
 }
 
@@ -247,4 +268,18 @@
 
 .avatar svg {
     fill: #fff;
+}
+
+/* Quick action buttons */
+.btn.py-3 {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+}
+
+.btn .icon {
+    transition: transform 0.3s ease;
+}
+
+.btn:hover .icon {
+    transform: scale(1.1);
 }
