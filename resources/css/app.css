@@ -1,0 +1,50 @@
+/**
+ * Sistema Agrícola - CoreUI Laravel
+ * Estilos principales
+ */
+
+/* CoreUI Core */
+@import '@coreui/coreui/dist/css/coreui.min.css';
+
+/* CoreUI Icons */
+@import '@coreui/icons/css/all.min.css';
+
+/* Estilos personalizados */
+:root {
+    --cui-primary: #28a745;
+    --cui-secondary: #6c757d;
+    --cui-success: #28a745;
+    --cui-info: #17a2b8;
+    --cui-warning: #ffc107;
+    --cui-danger: #dc3545;
+}
+
+/* Tema agrícola verde */
+.sidebar {
+    --cui-sidebar-bg: #2d572c;
+}
+
+.sidebar-nav .nav-link.active {
+    background-color: #28a745;
+}
+
+/* Cards personalizados */
+.card-stats {
+    border-left: 4px solid var(--cui-primary);
+}
+
+/* Responsive tables */
+.table-responsive {
+    border-radius: 0.25rem;
+}
+
+/* Botones personalizados */
+.btn-primary {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-primary:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
