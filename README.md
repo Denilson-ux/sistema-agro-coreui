@@ -1,211 +1,66 @@
-# 🌾 Sistema de Gestión Agrícola - CoreUI Laravel
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-Sistema completo para administrar trabajos agrícolas del campo: rastreadas, fumigadas, siembra y cosecha.
+<p align="center">
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
-## 📋 Características
+## About Laravel
 
-- ✅ Gestión de **Empleados** (cualquier empleado puede realizar cualquier trabajo)
-- ✅ Gestión de **Parcelas** y **Cultivos** (variedades: Soja 3.02, DM 6.2, etc.)
-- ✅ Registro de **Trabajos Realizados**:
-  - Rastreada (solo precio por hectárea)
-  - Fumigada (con múltiples insumos/productos)
-  - Siembra (vinculada a variedad de cultivo)
-  - Cosecha (solo precio por hectárea)
-- ✅ Control de **Insumos Aplicados** (solo para fumigadas)
-- ✅ Sistema de **Anticipos** a empleados con descuentos automáticos
-- ✅ Reportes y estadísticas de costos
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-## 🛠️ Tecnologías
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-- **Backend:** Laravel 11.x
-- **Frontend:** CoreUI Laravel (Bootstrap 5)
-- **Base de Datos:** SQL Server / MySQL
-- **PHP:** 8.2+
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## 📦 Instalación
+## Learning Laravel
 
-### 1. Clonar el repositorio
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-```bash
-git clone https://github.com/Denilson-ux/sistema-agro-coreui.git
-cd sistema-agro-coreui
-```
+You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-### 2. Instalar dependencias
+If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-```bash
-composer install
-npm install
-```
+## Laravel Sponsors
 
-### 3. Configurar entorno
+We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-```bash
-cp .env.example .env
-php artisan key:generate
-```
+### Premium Partners
 
-### 4. Configurar base de datos
+- **[Vehikl](https://vehikl.com/)**
+- **[Tighten Co.](https://tighten.co)**
+- **[WebReinvent](https://webreinvent.com/)**
+- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+- **[64 Robots](https://64robots.com)**
+- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
+- **[Cyber-Duck](https://cyber-duck.co.uk)**
+- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
+- **[Jump24](https://jump24.co.uk)**
+- **[Redberry](https://redberry.international/laravel/)**
+- **[Active Logic](https://activelogic.com)**
+- **[byte5](https://byte5.de)**
+- **[OP.GG](https://op.gg)**
 
-Edita el archivo `.env`:
+## Contributing
 
-**Para SQL Server:**
-```env
-DB_CONNECTION=sqlsrv
-DB_HOST=127.0.0.1
-DB_PORT=1433
-DB_DATABASE=AGRO
-DB_USERNAME=sa
-DB_PASSWORD=tu_password
-```
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-**Para MySQL:**
-```env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=agro
-DB_USERNAME=root
-DB_PASSWORD=
-```
+## Code of Conduct
 
-### 5. Crear base de datos
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-Ejecuta el script SQL correspondiente:
-- **SQL Server:** `database/schema-sqlserver.sql`
-- **MySQL:** `database/schema-mysql.sql`
+## Security Vulnerabilities
 
-### 6. Ejecutar migraciones (cuando estén listas)
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-```bash
-php artisan migrate
-php artisan db:seed
-```
+## License
 
-### 7. Compilar assets
-
-```bash
-npm run dev
-```
-
-### 8. Iniciar servidor
-
-```bash
-php artisan serve
-```
-
-Visita: `http://localhost:8000`
-
-## 📊 Estructura de Base de Datos
-
-### Tablas Principales:
-
-1. **empleados** - Trabajadores del campo
-2. **parcelas** - Lotes de tierra
-3. **cultivos** - Cultivos con variedades (Soja 3.02, DM 6.2, etc.)
-4. **tipos_trabajo** - Rastreada, Fumigada, Siembra, Cosecha
-5. **trabajos_realizados** - Tabla central (quién, qué, dónde, cuándo)
-6. **insumos_aplicados** - Productos químicos (solo fumigadas)
-7. **anticipos** - Adelantos de pago a empleados
-8. **descuentos_anticipos** - Control de descuentos
-
-## 🎯 Flujo del Sistema
-
-### Ejemplo de uso:
-
-1. **Rastreada** → Juan hace rastreada en Lote Norte (50 ha × Bs. 80 = Bs. 4,000)
-2. **Anticipo** → Juan pide anticipo de Bs. 1,500
-3. **Siembra** → Carlos siembra Soja 3.02 en Lote Norte (Bs. 3,500)
-4. **Fumigada** → Juan fumiga con 5 productos (mano obra + insumos)
-5. **Cosecha** → Pedro cosecha Lote Norte (50 ha × Bs. 120 = Bs. 6,000)
-6. **Liquidación** → Total ganado - anticipos = saldo a pagar
-
-## 🚀 Instalación de CoreUI Laravel
-
-### Opción 1: Template oficial CoreUI
-
-```bash
-# Descargar CoreUI Laravel desde GitHub
-git clone https://github.com/coreui/coreui-free-laravel-admin-template.git temp-coreui
-
-# Copiar archivos necesarios
-cp -r temp-coreui/resources/* resources/
-cp -r temp-coreui/public/* public/
-
-# Limpiar
-rm -rf temp-coreui
-```
-
-### Opción 2: Instalar manualmente
-
-```bash
-# Instalar CoreUI via npm
-npm install @coreui/coreui
-npm install @coreui/icons
-
-# Compilar
-npm run build
-```
-
-## 📁 Estructura del Proyecto
-
-```
-sistema-agro-coreui/
-├── app/
-│   ├── Models/
-│   │   ├── Empleado.php
-│   │   ├── Parcela.php
-│   │   ├── Cultivo.php
-│   │   ├── TipoTrabajo.php
-│   │   ├── TrabajoRealizado.php
-│   │   ├── InsumoAplicado.php
-│   │   └── Anticipo.php
-│   ├── Http/Controllers/
-│   │   ├── EmpleadoController.php
-│   │   ├── ParcelaController.php
-│   │   ├── TrabajoController.php
-│   │   └── AnticipoController.php
-├── database/
-│   ├── migrations/
-│   ├── seeders/
-│   ├── schema-sqlserver.sql
-│   └── schema-mysql.sql
-├── resources/
-│   ├── views/
-│   │   ├── empleados/
-│   │   ├── parcelas/
-│   │   ├── trabajos/
-│   │   └── reportes/
-└── routes/
-    └── web.php
-```
-
-## 🔐 Usuarios por Defecto (después de seeder)
-
-- **Admin:** admin@agro.com / password
-
-## 📖 Documentación
-
-- [CoreUI Laravel Docs](https://coreui.io/laravel/docs/)
-- [Laravel Docs](https://laravel.com/docs)
-- [Diagrama de Base de Datos](database/diagrama-er.md)
-
-## 🤝 Contribuir
-
-1. Fork el proyecto
-2. Crea tu feature branch (`git checkout -b feature/nueva-funcionalidad`)
-3. Commit tus cambios (`git commit -am 'Agregar nueva funcionalidad'`)
-4. Push al branch (`git push origin feature/nueva-funcionalidad`)
-5. Abre un Pull Request
-
-## 📝 Licencia
-
-MIT License
-
-## 👤 Autor
-
-**Denilson** - [GitHub](https://github.com/Denilson-ux)
-
----
-
-⭐ Si te gusta este proyecto, dale una estrella en GitHub!
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
