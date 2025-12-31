@@ -33,62 +33,65 @@ document.addEventListener('DOMContentLoaded', function () {
         return new coreui.Popover(popoverTriggerEl);
     });
 
-    // FIX DEFINITIVO: Detectar por ANCHO del sidebar en lugar de clase
+    // FIX DEFINITIVO: Detectar sidebar-unfoldable (clase que usa CoreUI)
     const sidebar = document.querySelector('.sidebar');
     const wrapper = document.querySelector('.wrapper');
     
     if (sidebar && wrapper) {
-        // Función para ajustar el wrapper según el ancho del sidebar
+        // Función para ajustar el wrapper
         function adjustWrapper() {
-            // Obtener el ancho actual del sidebar
-            const sidebarWidth = sidebar.offsetWidth;
+            // CoreUI agrega la clase 'sidebar-unfoldable' cuando se colapsa
+            const isUnfoldable = sidebar.classList.contains('sidebar-unfoldable');
             
-            console.log('Ancho del sidebar:', sidebarWidth + 'px');
+            console.log('Sidebar unfoldable:', isUnfoldable);
             
-            // Ajustar el padding del wrapper al ancho exacto del sidebar
-            wrapper.style.paddingLeft = sidebarWidth + 'px';
-            
-            console.log('Aplicando padding:', sidebarWidth + 'px');
+            if (isUnfoldable) {
+                // Sidebar colapsado - wrapper pegado a la izquierda
+                wrapper.style.paddingLeft = '64px'; // CoreUI usa ~64px cuando está colapsado
+                console.log('Aplicando padding: 64px (colapsado)');
+            } else {
+                // Sidebar abierto - wrapper con espacio completo
+                wrapper.style.paddingLeft = '256px';
+                console.log('Aplicando padding: 256px (abierto)');
+            }
         }
         
-        // Observar cambios en el estilo del sidebar (ancho)
+        // Observar cambios en las clases del sidebar
         const observer = new MutationObserver(function(mutations) {
             mutations.forEach(function(mutation) {
-                if (mutation.attributeName === 'class' || mutation.attributeName === 'style') {
-                    console.log('Sidebar cambió, reajustando wrapper');
-                    // Esperar un poco para que la transición termine
-                    setTimeout(adjustWrapper, 50);
+                if (mutation.attributeName === 'class') {
+                    console.log('Clases del sidebar:', sidebar.className);
+                    adjustWrapper();
                 }
             });
         });
         
         observer.observe(sidebar, {
             attributes: true,
-            attributeFilter: ['class', 'style']
+            attributeFilter: ['class']
         });
         
         // Ajustar al cargar la página
+        console.log('Inicializando, clases:', sidebar.className);
         adjustWrapper();
         
-        // También escuchar eventos de click en el botón toggle
-        const toggleBtn = document.querySelector('[data-coreui-toggle="unfoldable"]');
-        if (toggleBtn) {
-            toggleBtn.addEventListener('click', function() {
-                console.log('Botón toggle clickeado');
-                setTimeout(adjustWrapper, 350); // Esperar la transición CSS
+        // Escuchar el botón toggle del header
+        const headerToggleBtn = document.querySelector('.header-toggler');
+        if (headerToggleBtn) {
+            headerToggleBtn.addEventListener('click', function() {
+                console.log('Botón header clickeado');
+                setTimeout(adjustWrapper, 50);
             });
         }
         
-        // Escuchar cambios de tamaño de ventana
-        window.addEventListener('resize', adjustWrapper);
-        
-        // Escuchar transiciones del sidebar
-        sidebar.addEventListener('transitionend', function(e) {
-            if (e.propertyName === 'width') {
-                console.log('Transición de ancho finalizada');
-                adjustWrapper();
-            }
-        });
+        // Escuchar el botón toggle del sidebar
+        const sidebarToggleBtn = document.querySelector('.sidebar-toggler');
+        if (sidebarToggleBtn) {
+            sidebarToggleBtn.addEventListener('click', function() {
+                console.log('Botón sidebar clickeado');
+                setTimeout(adjustWrapper, 50);
+            });
+        }
     } else {
         console.error('Sidebar o wrapper no encontrados');
     }
