@@ -43,11 +43,11 @@ document.addEventListener('DOMContentLoaded', function () {
             const isNarrow = sidebar.classList.contains('sidebar-narrow');
             
             if (isNarrow) {
-                // Sidebar colapsado - wrapper con margen pequeño
-                wrapper.style.marginLeft = '56px';
+                // Sidebar colapsado - wrapper pegado a la izquierda
+                wrapper.style.paddingLeft = '56px';
             } else {
-                // Sidebar abierto - wrapper con margen normal
-                wrapper.style.marginLeft = '256px';
+                // Sidebar abierto - wrapper con espacio completo
+                wrapper.style.paddingLeft = '256px';
             }
         }
         
