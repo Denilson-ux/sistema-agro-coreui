@@ -23,14 +23,32 @@
     --cui-sidebar-width: 256px;
 }
 
+/* FIX: Body y HTML con fondo gris claro */
+html, body {
+    background-color: #f0f2f5 !important;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
 /* FIX PRINCIPAL: Wrapper con margen para sidebar */
 .wrapper {
     padding-left: 0;
+    background-color: #f0f2f5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: padding-left 0.3s ease;
 }
 
 @media (min-width: 768px) {
     .wrapper {
         padding-left: var(--cui-sidebar-width) !important;
+    }
+    
+    /* Cuando el sidebar está colapsado */
+    .sidebar-narrow ~ .wrapper {
+        padding-left: 56px !important;
     }
 }
 
@@ -43,6 +61,7 @@
     left: 0;
     z-index: 1030;
     width: var(--cui-sidebar-width);
+    transition: all 0.3s ease;
 }
 
 .sidebar-brand {
@@ -88,6 +107,7 @@
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
     border: none;
     border-radius: 0.5rem;
+    background-color: #fff;
 }
 
 .card-header {
@@ -136,14 +156,23 @@
     position: sticky;
     top: 0;
     z-index: 1020;
+    background-color: #fff;
 }
 
-/* Footer */
+/* FIX: Body principal con flex-grow */
+.body {
+    padding: 1.5rem;
+    background-color: #f0f2f5;
+    flex: 1;
+}
+
+/* FIX: Footer sin espacio superior */
 .footer {
-    background: #f8f9fa;
+    background: #fff;
     border-top: 1px solid #dee2e6;
     padding: 1rem;
     color: #6c757d;
+    margin-top: 0 !important;
 }
 
 /* Tablas responsive */
@@ -235,6 +264,10 @@
     .wrapper {
         padding-left: 0 !important;
     }
+    
+    .body {
+        padding: 1rem;
+    }
 }
 
 /* Loading spinner */
@@ -290,13 +323,7 @@
     transform: scale(1.1);
 }
 
-/* Body principal */
-.body {
-    padding: 1rem;
-}
-
-@media (min-width: 768px) {
-    .body {
-        padding: 1.5rem;
-    }
+/* Container con ancho máximo */
+.container-lg {
+    background-color: transparent;
 }
