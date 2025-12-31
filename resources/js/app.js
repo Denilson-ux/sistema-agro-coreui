@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return new coreui.Popover(popoverTriggerEl);
     });
 
-    // FIX DEFINITIVO: Detectar TODOS los estados del sidebar
+    // FIX DEFINITIVO: Detectar TODOS los estados del sidebar + hover
     const sidebar = document.querySelector('.sidebar');
     const wrapper = document.querySelector('.wrapper');
     
@@ -42,16 +42,22 @@ document.addEventListener('DOMContentLoaded', function () {
         function adjustWrapper() {
             const isHidden = sidebar.classList.contains('hide');
             const isUnfoldable = sidebar.classList.contains('sidebar-unfoldable');
+            const isHovering = sidebar.matches(':hover');
             
             console.log('Sidebar oculto (hide):', isHidden);
             console.log('Sidebar plegado (unfoldable):', isUnfoldable);
+            console.log('Sidebar hover:', isHovering);
             
             if (isHidden) {
                 // Sidebar completamente oculto - wrapper sin padding
                 wrapper.style.paddingLeft = '0px';
                 console.log('Aplicando padding: 0px (oculto)');
+            } else if (isUnfoldable && isHovering) {
+                // Sidebar minimizado PERO con hover - wrapper con padding completo temporalmente
+                wrapper.style.paddingLeft = '256px';
+                console.log('Aplicando padding: 256px (hover sobre minimizado)');
             } else if (isUnfoldable) {
-                // Sidebar minimizado - wrapper con padding pequeño
+                // Sidebar minimizado sin hover - wrapper con padding pequeño
                 wrapper.style.paddingLeft = '64px';
                 console.log('Aplicando padding: 64px (minimizado)');
             } else {
@@ -76,6 +82,17 @@ document.addEventListener('DOMContentLoaded', function () {
             attributeFilter: ['class']
         });
         
+        // NUEVO: Escuchar eventos de mouse en el sidebar para detectar hover
+        sidebar.addEventListener('mouseenter', function() {
+            console.log('Mouse entró al sidebar');
+            adjustWrapper();
+        });
+        
+        sidebar.addEventListener('mouseleave', function() {
+            console.log('Mouse salió del sidebar');
+            adjustWrapper();
+        });
+        
         // Ajustar al cargar la página
         console.log('Inicializando, clases:', sidebar.className);
         adjustWrapper();
@@ -89,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
         
-        // Escuchar el botón toggle del sidebar
+        // Escuchar el botón toggle del sidebar (botón de abajo)
         const sidebarToggleBtn = document.querySelector('.sidebar-toggler');
         if (sidebarToggleBtn) {
             sidebarToggleBtn.addEventListener('click', function() {
