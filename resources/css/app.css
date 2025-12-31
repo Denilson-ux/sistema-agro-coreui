@@ -21,35 +21,45 @@
     --cui-sidebar-hover-bg: #28a745;
     --cui-sidebar-active-bg: #28a745;
     --cui-sidebar-width: 256px;
+    --cui-sidebar-narrow-width: 56px;
     --cui-header-height: 64px;
 }
 
-/* FIX: Body y HTML con fondo gris claro */
-html, body {
-    background-color: #f0f2f5 !important;
+/* FIX: Body y HTML sin espacio blanco */
+html {
+    background-color: #1e4620 !important;
     margin: 0;
     padding: 0;
     height: 100%;
 }
 
-/* FIX PRINCIPAL: Wrapper con margen para sidebar */
+body {
+    background-color: #f0f2f5 !important;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+/* FIX: Wrapper responsive al sidebar */
 .wrapper {
     padding-left: 0;
     background-color: #f0f2f5;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
     transition: padding-left 0.3s ease;
 }
 
+/* Desktop: Sidebar abierto */
 @media (min-width: 768px) {
     .wrapper {
-        padding-left: var(--cui-sidebar-width) !important;
+        padding-left: var(--cui-sidebar-width);
     }
-    
-    /* Cuando el sidebar está colapsado */
-    .sidebar-narrow ~ .wrapper {
-        padding-left: 56px !important;
+}
+
+/* Desktop: Sidebar colapsado/narrow */
+@media (min-width: 768px) {
+    .sidebar-narrow .wrapper,
+    .sidebar-unfoldable.sidebar-narrow .wrapper {
+        padding-left: var(--cui-sidebar-narrow-width);
     }
 }
 
@@ -63,6 +73,12 @@ html, body {
     z-index: 1030;
     width: var(--cui-sidebar-width);
     transition: all 0.3s ease;
+}
+
+/* Sidebar cuando está colapsado */
+.sidebar-narrow .sidebar,
+.sidebar.sidebar-narrow {
+    width: var(--cui-sidebar-narrow-width);
 }
 
 .sidebar-brand {
@@ -151,7 +167,7 @@ html, body {
     border-color: #1c7430;
 }
 
-/* FIX: Header completamente fijo */
+/* FIX: Header responsive al sidebar */
 .header {
     position: fixed;
     top: 0;
@@ -164,31 +180,42 @@ html, body {
     transition: left 0.3s ease;
 }
 
+/* Header ajustado al sidebar en desktop */
 @media (min-width: 768px) {
     .header {
         left: var(--cui-sidebar-width);
     }
-    
-    .sidebar-narrow ~ .wrapper .header {
-        left: 56px;
+}
+
+/* Header cuando sidebar está colapsado */
+@media (min-width: 768px) {
+    .sidebar-narrow .header,
+    .sidebar-unfoldable.sidebar-narrow .header {
+        left: var(--cui-sidebar-narrow-width);
     }
 }
 
-/* FIX: Body principal con padding-top para el header */
+/* Mobile: header sin offset */
+@media (max-width: 767px) {
+    .header {
+        left: 0 !important;
+    }
+}
+
+/* Body principal */
 .body {
     padding: 1.5rem;
     padding-top: calc(var(--cui-header-height) + 1.5rem);
     background-color: #f0f2f5;
-    flex: 1;
+    min-height: calc(100vh - var(--cui-header-height));
 }
 
-/* FIX: Footer sin espacio superior */
+/* Footer */
 .footer {
     background: #fff;
     border-top: 1px solid #dee2e6;
     padding: 1rem;
     color: #6c757d;
-    margin-top: 0 !important;
 }
 
 /* Tablas responsive */
@@ -281,10 +308,6 @@ html, body {
         padding-left: 0 !important;
     }
     
-    .header {
-        left: 0 !important;
-    }
-    
     .body {
         padding: 1rem;
         padding-top: calc(var(--cui-header-height) + 1rem);
@@ -344,7 +367,7 @@ html, body {
     transform: scale(1.1);
 }
 
-/* Container con ancho máximo */
+/* Container */
 .container-lg {
     background-color: transparent;
 }
