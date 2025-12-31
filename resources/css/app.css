@@ -21,6 +21,7 @@
     --cui-sidebar-hover-bg: #28a745;
     --cui-sidebar-active-bg: #28a745;
     --cui-sidebar-width: 256px;
+    --cui-header-height: 64px;
 }
 
 /* FIX: Body y HTML con fondo gris claro */
@@ -150,18 +151,33 @@ html, body {
     border-color: #1c7430;
 }
 
-/* Header personalizado */
+/* FIX: Header completamente fijo */
 .header {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: sticky;
+    position: fixed;
     top: 0;
-    z-index: 1020;
+    left: 0;
+    right: 0;
+    height: var(--cui-header-height);
     background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1020;
+    transition: left 0.3s ease;
 }
 
-/* FIX: Body principal con flex-grow */
+@media (min-width: 768px) {
+    .header {
+        left: var(--cui-sidebar-width);
+    }
+    
+    .sidebar-narrow ~ .wrapper .header {
+        left: 56px;
+    }
+}
+
+/* FIX: Body principal con padding-top para el header */
 .body {
     padding: 1.5rem;
+    padding-top: calc(var(--cui-header-height) + 1.5rem);
     background-color: #f0f2f5;
     flex: 1;
 }
@@ -265,8 +281,13 @@ html, body {
         padding-left: 0 !important;
     }
     
+    .header {
+        left: 0 !important;
+    }
+    
     .body {
         padding: 1rem;
+        padding-top: calc(var(--cui-header-height) + 1rem);
     }
 }
 
