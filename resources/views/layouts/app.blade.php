@@ -16,6 +16,9 @@
     @stack('styles')
 </head>
 <body>
+    <!-- SVG Icons -->
+    @include('layouts.sprites')
+    
     <!-- Sidebar -->
     @include('layouts.sidebar')
     
@@ -28,7 +31,9 @@
             <div class="container-lg">
                 @if(session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <i class="cil-check-circle me-2"></i>
+                        <svg class="icon me-2">
+                            <use xlink:href="#cil-check-circle"></use>
+                        </svg>
                         {{ session('success') }}
                         <button type="button" class="btn-close" data-coreui-dismiss="alert"></button>
                     </div>
@@ -36,7 +41,9 @@
                 
                 @if(session('error'))
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <i class="cil-x-circle me-2"></i>
+                        <svg class="icon me-2">
+                            <use xlink:href="#cil-x-circle"></use>
+                        </svg>
                         {{ session('error') }}
                         <button type="button" class="btn-close" data-coreui-dismiss="alert"></button>
                     </div>
