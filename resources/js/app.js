@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return new coreui.Popover(popoverTriggerEl);
     });
 
-    // FIX DEFINITIVO: Detectar TODOS los estados del sidebar + hover
+    // FIX DEFINITIVO: Detectar TODOS los estados del sidebar
     const sidebar = document.querySelector('.sidebar');
     const wrapper = document.querySelector('.wrapper');
     
@@ -41,29 +41,32 @@ document.addEventListener('DOMContentLoaded', function () {
         // Función para ajustar el wrapper
         function adjustWrapper() {
             const isHidden = sidebar.classList.contains('hide');
-            const isUnfoldable = sidebar.classList.contains('sidebar-unfoldable');
+            // CoreUI puede usar 'sidebar-unfoldable' O 'sidebar-narrow-unfoldable'
+            const isUnfoldable = sidebar.classList.contains('sidebar-unfoldable') || 
+                               sidebar.classList.contains('sidebar-narrow-unfoldable');
             const isHovering = sidebar.matches(':hover');
             
             console.log('Sidebar oculto (hide):', isHidden);
-            console.log('Sidebar plegado (unfoldable):', isUnfoldable);
+            console.log('Sidebar plegado (unfoldable/narrow):', isUnfoldable);
             console.log('Sidebar hover:', isHovering);
+            console.log('Clases actuales:', sidebar.className);
             
             if (isHidden) {
                 // Sidebar completamente oculto - wrapper sin padding
                 wrapper.style.paddingLeft = '0px';
-                console.log('Aplicando padding: 0px (oculto)');
+                console.log('✅ Aplicando padding: 0px (oculto)');
             } else if (isUnfoldable && isHovering) {
                 // Sidebar minimizado PERO con hover - wrapper con padding completo temporalmente
                 wrapper.style.paddingLeft = '256px';
-                console.log('Aplicando padding: 256px (hover sobre minimizado)');
+                console.log('✅ Aplicando padding: 256px (hover sobre minimizado)');
             } else if (isUnfoldable) {
                 // Sidebar minimizado sin hover - wrapper con padding pequeño
                 wrapper.style.paddingLeft = '64px';
-                console.log('Aplicando padding: 64px (minimizado)');
+                console.log('✅ Aplicando padding: 64px (minimizado)');
             } else {
                 // Sidebar abierto completo - wrapper con padding normal
                 wrapper.style.paddingLeft = '256px';
-                console.log('Aplicando padding: 256px (abierto)');
+                console.log('✅ Aplicando padding: 256px (abierto)');
             }
         }
         
@@ -71,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const observer = new MutationObserver(function(mutations) {
             mutations.forEach(function(mutation) {
                 if (mutation.attributeName === 'class') {
-                    console.log('Clases cambiaron:', sidebar.className);
+                    console.log('🔄 Clases del sidebar cambiaron:', sidebar.className);
                     adjustWrapper();
                 }
             });
@@ -82,41 +85,46 @@ document.addEventListener('DOMContentLoaded', function () {
             attributeFilter: ['class']
         });
         
-        // NUEVO: Escuchar eventos de mouse en el sidebar para detectar hover
+        // Escuchar eventos de mouse en el sidebar para detectar hover
         sidebar.addEventListener('mouseenter', function() {
-            console.log('Mouse entró al sidebar');
+            console.log('🖱️ Mouse entró al sidebar');
             adjustWrapper();
         });
         
         sidebar.addEventListener('mouseleave', function() {
-            console.log('Mouse salió del sidebar');
+            console.log('🖱️ Mouse salió del sidebar');
             adjustWrapper();
         });
         
         // Ajustar al cargar la página
-        console.log('Inicializando, clases:', sidebar.className);
+        console.log('🚀 Inicializando sidebar...');
+        console.log('Clases iniciales:', sidebar.className);
         adjustWrapper();
         
-        // Escuchar el botón toggle del header
+        // Escuchar el botón toggle del header (botón hamburguesa arriba)
         const headerToggleBtn = document.querySelector('.header-toggler');
         if (headerToggleBtn) {
             headerToggleBtn.addEventListener('click', function() {
-                console.log('Botón header clickeado');
+                console.log('🔘 Botón header clickeado');
                 setTimeout(adjustWrapper, 50);
             });
+            console.log('✅ Listener agregado al botón header');
         }
         
-        // Escuchar el botón toggle del sidebar (botón de abajo)
+        // Escuchar el botón toggle del sidebar (botón de abajo en el sidebar)
         const sidebarToggleBtn = document.querySelector('.sidebar-toggler');
         if (sidebarToggleBtn) {
             sidebarToggleBtn.addEventListener('click', function() {
-                console.log('Botón sidebar clickeado');
+                console.log('🔘 Botón sidebar-toggler clickeado');
                 setTimeout(adjustWrapper, 50);
             });
+            console.log('✅ Listener agregado al botón sidebar-toggler');
         }
     } else {
-        console.error('Sidebar o wrapper no encontrados');
+        console.error('❌ Sidebar o wrapper no encontrados');
+        console.log('Sidebar:', sidebar);
+        console.log('Wrapper:', wrapper);
     }
 });
 
-console.log('Sistema Agrícola CoreUI Laravel - Cargado ✅');
+console.log('✅ Sistema Agrícola CoreUI Laravel - Cargado');
