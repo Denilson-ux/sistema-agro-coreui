@@ -1,111 +1,84 @@
 /**
- * Sistema Agrícola - CoreUI Laravel
- * Estilos principales - SIMPLIFICADO Y FUNCIONAL
+ * Sistema Agrícola - CoreUI Laravel  
+ * Estilos principales
  */
 
 /* CoreUI Core */
 @import '@coreui/coreui/dist/css/coreui.min.css';
 
-/* Variables */
+/* Variables personalizadas - Tema Verde Agrícola */
 :root {
-    --cui-sidebar-width: 256px;
-    --cui-sidebar-narrow-width: 56px;
+    --cui-primary: #28a745;
+    --cui-primary-rgb: 40, 167, 69;
+    --cui-secondary: #6c757d;
+    --cui-success: #28a745;
+    --cui-info: #17a2b8;
+    --cui-warning: #ffc107;
+    --cui-danger: #dc3545;
+    
+    /* Sidebar colors */
+    --cui-sidebar-bg: #1e4620;
+    --cui-sidebar-hover-bg: #28a745;
+    --cui-sidebar-active-bg: #28a745;
 }
 
-/* RESET COMPLETO */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html, body {
-    height: 100%;
-    background: #f0f2f5;
-    overflow-x: hidden;
-}
-
-/* SIDEBAR - SIEMPRE FIJO - COLOR ORIGINAL GRIS OSCURO */
-.sidebar {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    bottom: 0 !important;
-    width: var(--cui-sidebar-width) !important;
-    background: #2c3338 !important;
-    z-index: 1030;
-    transition: width 0.3s ease, transform 0.3s ease;
-}
-
-/* Sidebar colapsado */
-.sidebar.sidebar-narrow {
-    width: var(--cui-sidebar-narrow-width) !important;
-}
-
-/* WRAPPER - SE AJUSTA AL SIDEBAR */
+/* FIX PRINCIPAL: Wrapper con padding-left dinámico controlado por JS */
 .wrapper {
-    margin-left: var(--cui-sidebar-width);
+    padding-left: 0;
+    background-color: #f0f2f5;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background: #f0f2f5;
-    transition: margin-left 0.3s ease;
+    transition: padding-left 0.3s ease, margin-left 0.3s ease;
 }
 
-/* Wrapper cuando sidebar está colapsado */
-body:has(.sidebar.sidebar-narrow) .wrapper {
-    margin-left: var(--cui-sidebar-narrow-width);
+/* Estado por defecto en desktop */
+@media (min-width: 768px) {
+    .wrapper {
+        padding-left: 256px;
+    }
 }
 
-/* HEADER - FIJO EN LA PARTE SUPERIOR */
-.header {
-    position: sticky !important;
-    top: 0 !important;
-    z-index: 1020;
-    background: #fff;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    width: 100%;
+/* Sidebar personalizado */
+.sidebar {
+    background: var(--cui-sidebar-bg) !important;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1030;
+    width: 256px;
+    transition: all 0.3s ease;
 }
 
-/* BODY CONTENT */
-.body {
-    flex: 1;
-    padding: 1.5rem;
-    background: #f0f2f5;
+/* Sidebar cuando está colapsado */
+.sidebar.sidebar-narrow {
+    width: 56px;
 }
 
-/* FOOTER */
-.footer {
-    background: #fff;
-    border-top: 1px solid #dee2e6;
-    padding: 1rem;
-    color: #6c757d;
-}
-
-/* SIDEBAR STYLING - COLOR ORIGINAL */
 .sidebar-brand {
-    background: rgba(0,0,0,0.2);
+    background: rgba(0, 0, 0, 0.2);
     padding: 1rem;
 }
 
 .sidebar-nav .nav-link {
-    color: rgba(255,255,255,0.8) !important;
+    color: rgba(255, 255, 255, 0.8) !important;
     transition: all 0.3s ease;
 }
 
 .sidebar-nav .nav-link:hover {
-    background: rgba(255,255,255,0.1) !important;
+    background-color: var(--cui-sidebar-hover-bg) !important;
     color: #fff !important;
 }
 
 .sidebar-nav .nav-link.active {
-    background: #28a745 !important;
+    background-color: var(--cui-sidebar-active-bg) !important;
     color: #fff !important;
     font-weight: 600;
 }
 
 .sidebar-nav .nav-icon {
-    color: rgba(255,255,255,0.6);
+    color: rgba(255, 255, 255, 0.6);
 }
 
 .sidebar-nav .nav-link:hover .nav-icon,
@@ -114,61 +87,173 @@ body:has(.sidebar.sidebar-narrow) .wrapper {
 }
 
 .sidebar-nav .nav-title {
-    color: rgba(255,255,255,0.5);
+    color: rgba(255, 255, 255, 0.5);
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
     padding: 0.75rem 1rem 0.25rem;
 }
 
-/* CARDS */
+/* Cards personalizados */
 .card {
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
     border: none;
     border-radius: 0.5rem;
-    box-shadow: 0 0 1rem rgba(0,0,0,0.1);
-    background: #fff;
 }
 
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    font-weight: 600;
+}
+
+/* Stats cards en dashboard */
 .card.text-white {
-    min-height: 120px;
+    border: none;
     border-radius: 0.75rem;
-    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    min-height: 120px;
+}
+
+.card.text-white .card-body {
+    padding: 1.5rem;
 }
 
 .card.text-white h3 {
-    font-size: 2rem;
+    font-size: 2rem !important;
     font-weight: 700;
 }
 
-/* BUTTONS */
+/* Botones personalizados */
 .btn-primary {
-    background: #28a745;
-    border-color: #28a745;
+    background-color: var(--cui-primary);
+    border-color: var(--cui-primary);
 }
 
 .btn-primary:hover {
-    background: #218838;
+    background-color: #218838;
     border-color: #1e7e34;
 }
 
-/* ALERTS */
+.btn-primary:active,
+.btn-primary:focus {
+    background-color: #1e7e34;
+    border-color: #1c7430;
+}
+
+/* Header personalizado */
+.header {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+    background-color: #fff;
+}
+
+/* FIX: Body principal con flex-grow */
+.body {
+    padding: 1.5rem;
+    background-color: #f0f2f5;
+    flex: 1;
+}
+
+/* FIX: Footer sin espacio superior */
+.footer {
+    background: #fff;
+    border-top: 1px solid #dee2e6;
+    padding: 1rem;
+    color: #6c757d;
+    margin-top: 0 !important;
+}
+
+/* Tablas responsive */
+.table-responsive {
+    border-radius: 0.5rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.05);
+}
+
+.table thead th {
+    background-color: var(--cui-primary);
+    color: #fff;
+    font-weight: 600;
+    border: none;
+}
+
+.table tbody tr:hover {
+    background-color: rgba(40, 167, 69, 0.1);
+}
+
+/* Badges */
+.badge {
+    font-weight: 600;
+    padding: 0.35em 0.65em;
+}
+
+/* Alerts */
 .alert {
     border-radius: 0.5rem;
     border: none;
 }
 
-/* RESPONSIVE - MÓVIL */
+.alert .icon {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+/* Forms */
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--cui-primary);
+    box-shadow: 0 0 0 0.25rem rgba(40, 167, 69, 0.25);
+}
+
+.form-label {
+    font-weight: 600;
+    color: #495057;
+}
+
+/* Icons */
+.icon {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    vertical-align: -0.125em;
+    fill: currentColor;
+}
+
+.icon-lg {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.icon-xl {
+    width: 2rem;
+    height: 2rem;
+}
+
+.icon-xxl {
+    width: 3rem;
+    height: 3rem;
+}
+
+/* Utilidades */
+.text-medium-emphasis {
+    color: #6c757d !important;
+}
+
+/* Responsive adjustments */
 @media (max-width: 767px) {
     .sidebar {
-        transform: translateX(-100%);
+        margin-left: -256px;
+        transition: margin-left 0.3s ease;
     }
     
     .sidebar.show {
-        transform: translateX(0);
+        margin-left: 0;
     }
     
     .wrapper {
-        margin-left: 0 !important;
+        padding-left: 0 !important;
     }
     
     .body {
@@ -176,14 +261,60 @@ body:has(.sidebar.sidebar-narrow) .wrapper {
     }
 }
 
-/* ICONS */
-.icon {
+/* Loading spinner */
+.spinner-border-sm {
     width: 1rem;
     height: 1rem;
-    fill: currentColor;
+    border-width: 0.15em;
 }
 
-.icon-xl {
+/* Estilos para notificaciones */
+.dropdown-menu {
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.dropdown-header {
+    font-weight: 700;
+    color: #495057;
+}
+
+/* Avatar */
+.avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     width: 2rem;
     height: 2rem;
+    border-radius: 50%;
+    background-color: var(--cui-primary);
+    color: #fff;
+}
+
+.avatar-md {
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.avatar svg {
+    fill: #fff;
+}
+
+/* Quick action buttons */
+.btn.py-3 {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+}
+
+.btn .icon {
+    transition: transform 0.3s ease;
+}
+
+.btn:hover .icon {
+    transform: scale(1.1);
+}
+
+/* Container con ancho máximo */
+.container-lg {
+    background-color: transparent;
 }
