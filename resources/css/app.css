@@ -29,7 +29,7 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    transition: padding-left 0.3s ease;
+    transition: padding-left 0.3s ease !important;
 }
 
 /* Sidebar personalizado */
@@ -44,9 +44,14 @@
     transition: all 0.3s ease;
 }
 
-/* Sidebar cuando está colapsado */
-.sidebar.sidebar-narrow {
-    width: 56px;
+/* Sidebar cuando está minimizado (unfoldable) */
+.sidebar.sidebar-unfoldable {
+    width: 64px;
+}
+
+/* Sidebar cuando está oculto */
+.sidebar.hide {
+    margin-left: -256px;
 }
 
 .sidebar-brand {

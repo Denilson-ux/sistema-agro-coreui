@@ -33,24 +33,29 @@ document.addEventListener('DOMContentLoaded', function () {
         return new coreui.Popover(popoverTriggerEl);
     });
 
-    // FIX DEFINITIVO: Detectar sidebar-unfoldable (clase que usa CoreUI)
+    // FIX DEFINITIVO: Detectar TODOS los estados del sidebar
     const sidebar = document.querySelector('.sidebar');
     const wrapper = document.querySelector('.wrapper');
     
     if (sidebar && wrapper) {
         // Función para ajustar el wrapper
         function adjustWrapper() {
-            // CoreUI agrega la clase 'sidebar-unfoldable' cuando se colapsa
+            const isHidden = sidebar.classList.contains('hide');
             const isUnfoldable = sidebar.classList.contains('sidebar-unfoldable');
             
-            console.log('Sidebar unfoldable:', isUnfoldable);
+            console.log('Sidebar oculto (hide):', isHidden);
+            console.log('Sidebar plegado (unfoldable):', isUnfoldable);
             
-            if (isUnfoldable) {
-                // Sidebar colapsado - wrapper pegado a la izquierda
-                wrapper.style.paddingLeft = '64px'; // CoreUI usa ~64px cuando está colapsado
-                console.log('Aplicando padding: 64px (colapsado)');
+            if (isHidden) {
+                // Sidebar completamente oculto - wrapper sin padding
+                wrapper.style.paddingLeft = '0px';
+                console.log('Aplicando padding: 0px (oculto)');
+            } else if (isUnfoldable) {
+                // Sidebar minimizado - wrapper con padding pequeño
+                wrapper.style.paddingLeft = '64px';
+                console.log('Aplicando padding: 64px (minimizado)');
             } else {
-                // Sidebar abierto - wrapper con espacio completo
+                // Sidebar abierto completo - wrapper con padding normal
                 wrapper.style.paddingLeft = '256px';
                 console.log('Aplicando padding: 256px (abierto)');
             }
@@ -60,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const observer = new MutationObserver(function(mutations) {
             mutations.forEach(function(mutation) {
                 if (mutation.attributeName === 'class') {
-                    console.log('Clases del sidebar:', sidebar.className);
+                    console.log('Clases cambiaron:', sidebar.className);
                     adjustWrapper();
                 }
             });
