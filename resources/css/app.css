@@ -20,11 +20,29 @@
     --cui-sidebar-bg: #1e4620;
     --cui-sidebar-hover-bg: #28a745;
     --cui-sidebar-active-bg: #28a745;
+    --cui-sidebar-width: 256px;
+}
+
+/* FIX PRINCIPAL: Wrapper con margen para sidebar */
+.wrapper {
+    padding-left: 0;
+}
+
+@media (min-width: 768px) {
+    .wrapper {
+        padding-left: var(--cui-sidebar-width) !important;
+    }
 }
 
 /* Sidebar personalizado */
 .sidebar {
     background: var(--cui-sidebar-bg) !important;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1030;
+    width: var(--cui-sidebar-width);
 }
 
 .sidebar-brand {
@@ -90,20 +108,9 @@
     padding: 1.5rem;
 }
 
-.card.text-white .fs-4 {
-    font-size: 1.75rem !important;
+.card.text-white h3 {
+    font-size: 2rem !important;
     font-weight: 700;
-    margin-bottom: 0.25rem;
-}
-
-.stats-icon {
-    opacity: 0.5;
-    flex-shrink: 0;
-}
-
-.stats-icon .icon {
-    width: 3rem;
-    height: 3rem;
 }
 
 /* Botones personalizados */
@@ -126,6 +133,9 @@
 /* Header personalizado */
 .header {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1020;
 }
 
 /* Footer */
@@ -212,22 +222,18 @@
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     .sidebar {
-        margin-left: -256px;
+        margin-left: calc(-1 * var(--cui-sidebar-width));
+        transition: margin-left 0.3s ease;
     }
     
     .sidebar.show {
         margin-left: 0;
     }
     
-    .card.text-white .fs-4 {
-        font-size: 1.5rem !important;
-    }
-    
-    .stats-icon .icon {
-        width: 2rem;
-        height: 2rem;
+    .wrapper {
+        padding-left: 0 !important;
     }
 }
 
@@ -282,4 +288,15 @@
 
 .btn:hover .icon {
     transform: scale(1.1);
+}
+
+/* Body principal */
+.body {
+    padding: 1rem;
+}
+
+@media (min-width: 768px) {
+    .body {
+        padding: 1.5rem;
+    }
 }
