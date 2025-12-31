@@ -32,6 +32,59 @@ document.addEventListener('DOMContentLoaded', function () {
     popoverTriggerList.map(function (popoverTriggerEl) {
         return new coreui.Popover(popoverTriggerEl);
     });
+
+    // FIX: Manejar el toggle del sidebar para ajustar el wrapper y header
+    const sidebar = document.querySelector('.sidebar');
+    const wrapper = document.querySelector('.wrapper');
+    const header = document.querySelector('.header');
+    
+    if (sidebar) {
+        // Observar cambios en las clases del sidebar
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.attributeName === 'class') {
+                    updateLayout();
+                }
+            });
+        });
+        
+        observer.observe(sidebar, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
+        
+        // Función para actualizar el layout
+        function updateLayout() {
+            const isNarrow = sidebar.classList.contains('sidebar-narrow');
+            
+            if (wrapper) {
+                if (isNarrow) {
+                    wrapper.style.paddingLeft = '56px';
+                } else {
+                    wrapper.style.paddingLeft = '256px';
+                }
+            }
+            
+            if (header) {
+                if (isNarrow) {
+                    header.style.left = '56px';
+                } else {
+                    header.style.left = '256px';
+                }
+            }
+        }
+        
+        // Aplicar el layout inicial
+        updateLayout();
+        
+        // También escuchar clicks en el botón toggle
+        const toggleBtn = document.querySelector('[data-coreui-toggle="minimize"]');
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', function() {
+                setTimeout(updateLayout, 50);
+            });
+        }
+    }
 });
 
 console.log('Sistema Agrícola CoreUI Laravel - Cargado ✅');
