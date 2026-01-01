@@ -29,9 +29,10 @@ html, body {
     --cui-sidebar-active-bg: #28a745;
 }
 
-/* FIX PRINCIPAL: Wrapper dinámico - Sin espacios */
+/* FIX PRINCIPAL: Wrapper con padding-top para header fijo */
 .wrapper {
     padding-left: 256px;
+    padding-top: 3.5rem !important;
     margin: 0 !important;
     background-color: #f0f2f5;
     min-height: 100vh;
@@ -147,15 +148,21 @@ html, body {
     border-color: #1c7430;
 }
 
-/* Header personalizado - SIN ESPACIOS ARRIBA */
+/* Header personalizado - POSITION FIXED PEGADO ARRIBA */
 .header {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: sticky;
-    top: 0;
+    position: fixed !important;
+    top: 0 !important;
+    left: 256px !important;
+    right: 0 !important;
     z-index: 1020;
     background-color: #fff;
     margin: 0 !important;
     padding: 0 !important;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    transition: left 0.3s ease;
 }
 
 .header .container-fluid {
@@ -267,6 +274,10 @@ html, body {
     
     .wrapper {
         padding-left: 0 !important;
+    }
+    
+    .header {
+        left: 0 !important;
     }
     
     .body {
