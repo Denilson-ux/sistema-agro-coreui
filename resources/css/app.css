@@ -6,6 +6,13 @@
 /* CoreUI Core */
 @import '@coreui/coreui/dist/css/coreui.min.css';
 
+/* RESET - Eliminar espacio en blanco superior */
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 100%;
+}
+
 /* Variables personalizadas - Tema Verde Agrícola */
 :root {
     --cui-primary: #28a745;
@@ -22,9 +29,10 @@
     --cui-sidebar-active-bg: #28a745;
 }
 
-/* FIX PRINCIPAL: Wrapper dinámico - JavaScript controla el padding */
+/* FIX PRINCIPAL: Wrapper dinámico - Sin espacios */
 .wrapper {
     padding-left: 256px;
+    margin: 0 !important;
     background-color: #f0f2f5;
     min-height: 100vh;
     display: flex;
@@ -139,13 +147,20 @@
     border-color: #1c7430;
 }
 
-/* Header personalizado */
+/* Header personalizado - SIN ESPACIOS ARRIBA */
 .header {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
     z-index: 1020;
     background-color: #fff;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.header .container-fluid {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
 }
 
 /* Body principal con flex-grow */
